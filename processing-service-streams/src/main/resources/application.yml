@@ -1,0 +1,50 @@
+﻿spring:
+  application:
+    name: processing-service-streams
+
+streams:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  application-id: ${KAFKA_STREAMS_APP_ID:processing-service-streams}
+  base-currency: ${BASE_CURRENCY:USD}
+  exactly-once: ${STREAMS_EXACTLY_ONCE:true}
+  num-stream-threads: ${STREAMS_THREADS:1}
+  state-dir: ${STREAMS_STATE_DIR:./build/kstreams}
+  cache-max-bytes-buffering: ${STREAMS_CACHE_BYTES:10485760}
+  commit-interval-ms: ${STREAMS_COMMIT_INTERVAL_MS:1000}
+  default-key-serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  default-value-serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  replace-thread-on-exception: ${STREAMS_REPLACE_THREAD:true}
+  suppress-outputs: ${STREAMS_SUPPRESS_OUTPUTS:true}
+  topics:
+    trades: ${TOPIC_TRADES:trades.v1}
+    refdata: ${TOPIC_REFDATA:refdata.v1}
+    fx: ${TOPIC_FX:fx.v1}
+    limits: ${TOPIC_LIMITS:limits.v1}
+    positions-current: ${TOPIC_POSITIONS_CURRENT:positions-current.v1}
+    exposures-current: ${TOPIC_EXPOSURES_CURRENT:exposures-current.v1}
+    risk-signals: ${TOPIC_RISK_SIGNALS:risk-signals.v1}
+    risk-signals-current: ${TOPIC_RISK_SIGNALS_CURRENT:risk-signals-current.v1}
+    trades-dlq: ${TOPIC_TRADES_DLQ:trades.v1.dlq}
+
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+processing:
+  dlq:
+    topic: ${TOPIC_TRADES_DLQ:trades.v1.dlq}
+    include-stacktrace: ${DLQ_INCLUDE_STACKTRACE:false}

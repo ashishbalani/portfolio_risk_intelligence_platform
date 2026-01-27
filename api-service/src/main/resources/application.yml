@@ -1,0 +1,23 @@
+﻿spring:
+  application:
+    name: api-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/portfolio
+    username: portfolio
+    password: portfolio
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

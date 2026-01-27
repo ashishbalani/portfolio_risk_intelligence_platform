@@ -1,0 +1,55 @@
+[versions]
+spring-boot = "3.3.5"
+spring-dependency-management = "1.1.6"
+springdoc = "2.6.0"
+logstash-encoder = "7.4"
+jackson = "2.17.2"
+slf4j = "2.0.13"
+testcontainers = "1.20.1"
+postgres = "42.7.4"
+junit = "5.11.2"
+junit-platform = "1.11.2"
+hibernate-validator = "8.0.1.Final"
+jakarta-validation = "3.0.2"
+jakarta-el = "4.0.2"
+flyway = "10.20.0"
+
+[libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+kafka-streams = { module = "org.apache.kafka:kafka-streams" }
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
+
+micrometer-prometheus = { module = "io.micrometer:micrometer-registry-prometheus" }
+springdoc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
+
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
+
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres" }
+
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+hibernate-validator = { module = "org.hibernate.validator:hibernate-validator", version.ref = "hibernate-validator" }
+jakarta-validation = { module = "jakarta.validation:jakarta.validation-api", version.ref = "jakarta-validation" }
+jakarta-el-api = { module = "jakarta.el:jakarta.el-api", version.ref = "jakarta-el" }
+jakarta-el-impl = { module = "org.glassfish:jakarta.el", version.ref = "jakarta-el" }
+
+testcontainers-junit = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
+testcontainers-postgres = { module = "org.testcontainers:postgresql", version.ref = "testcontainers" }
+testcontainers-kafka = { module = "org.testcontainers:kafka", version.ref = "testcontainers" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }

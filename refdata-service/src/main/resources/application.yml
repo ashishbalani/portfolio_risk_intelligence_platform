@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: refdata-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/refdata
+    username: refdata
+    password: refdata
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8081
+
+refdata:
+  api-key: ${REFDATA_API_KEY:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
