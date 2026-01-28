@@ -1,12 +1,7 @@
 package com.portfolio.risk.processingstreams.serdes;
 
 import com.portfolio.risk.common.dto.TradeEvent;
-import com.portfolio.risk.processingstreams.model.ExposureBucket;
-import com.portfolio.risk.processingstreams.model.FxRate;
-import com.portfolio.risk.processingstreams.model.InstrumentRefData;
-import com.portfolio.risk.processingstreams.model.LimitConfig;
-import com.portfolio.risk.processingstreams.model.Position;
-import com.portfolio.risk.processingstreams.model.RiskSignalEvent;
+import com.portfolio.risk.processingstreams.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

@@ -6,12 +6,7 @@ import com.portfolio.risk.processingstreams.metrics.StreamMetrics;
 import com.portfolio.risk.processingstreams.model.ErrorEnvelope;
 import com.portfolio.risk.processingstreams.serdes.JsonSerde;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.Topology;
-import org.apache.kafka.streams.TopologyTestDriver;
-import org.apache.kafka.streams.TestInputTopic;
-import org.apache.kafka.streams.TestOutputTopic;
+import org.apache.kafka.streams.*;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

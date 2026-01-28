@@ -1,7 +1,7 @@
 package com.portfolio.risk.processing.listener;
 
-import com.portfolio.risk.common.dto.PriceEvent;
 import com.portfolio.risk.common.dto.PositionDto;
+import com.portfolio.risk.common.dto.PriceEvent;
 import com.portfolio.risk.common.dto.TradeEvent;
 import com.portfolio.risk.common.observability.EventIdGenerator;
 import com.portfolio.risk.common.observability.EventIdHeader;

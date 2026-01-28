@@ -8,15 +8,12 @@ import com.portfolio.risk.processingstreams.model.FxRate;
 import com.portfolio.risk.processingstreams.model.InstrumentRefData;
 import com.portfolio.risk.processingstreams.serdes.JsonSerde;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.Topology;
-import org.apache.kafka.streams.TopologyTestDriver;
-import org.apache.kafka.streams.TestInputTopic;
-import org.apache.kafka.streams.TestOutputTopic;
+import org.apache.kafka.streams.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.UncheckedIOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +35,11 @@ class ExposureAggregationTopologyTest {
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "exposure-test");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "dummy:9092");
+        try {
+            props.put(StreamsConfig.STATE_DIR_CONFIG, Files.createTempDirectory("kstreams-exposure").toFile().getAbsolutePath());
+        } catch (Exception ex) {
+            throw new UncheckedIOException(new java.io.IOException("Failed to create state dir", ex));
+        }
 
         try (TopologyTestDriver driver = new TopologyTestDriver(topology, props)) {
             TestInputTopic<String, InstrumentRefData> refdata = driver.createInputTopic(

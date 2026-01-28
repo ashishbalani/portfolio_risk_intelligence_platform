@@ -1,6 +1,7 @@
 package com.portfolio.risk.processingstreams.processors;
 
 import com.portfolio.risk.common.dto.TradeEvent;
+import com.portfolio.risk.processingstreams.util.Keying;
 import org.apache.kafka.streams.kstream.ValueTransformerWithKey;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.state.KeyValueStore;
@@ -26,12 +27,20 @@ public class TradeDedupeTransformer implements ValueTransformerWithKey<String, T
         if (value == null || value.eventId() == null) {
             return value;
         }
-        String eventId = value.eventId().toString();
-        Instant existing = store.get(eventId);
+        String eventIdKey = "eventId:" + value.eventId();
+        Instant existing = store.get(eventIdKey);
         if (existing != null) {
             return null;
         }
-        store.put(eventId, value.eventTime());
+        if (value.eventTime() != null) {
+            String positionKey = "pos:" + Keying.positionKey(value.portfolioId(), value.bookId(), value.instrumentId());
+            Instant lastEventTime = store.get(positionKey);
+            if (lastEventTime != null && value.eventTime().isBefore(lastEventTime)) {
+                return null;
+            }
+            store.put(positionKey, value.eventTime());
+        }
+        store.put(eventIdKey, value.eventTime());
         return value;
     }
 
